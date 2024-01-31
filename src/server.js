@@ -5,8 +5,21 @@ import Mailgun from "mailgun.js";
 
 const server = fastify();
 
-// Adicione a configuração de CORS se necessário
-server.register(cors);
+// Configuração de origens permitidas
+const allowedOrigins = ["https://churrascomentro-api-email.vercel.app"];
+
+// Registre o plugin CORS com configuração de origens permitidas
+server.register(cors, {
+  origin: function (origin, cb) {
+    if (!origin) return cb(null, true);
+
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = "A origem não é permitida";
+      return cb(new Error(msg), false);
+    }
+    return cb(null, true);
+  },
+});
 
 // Endpoint para enviar e-mails
 server.post("/api/send-email", async (request, reply) => {
