@@ -33,6 +33,9 @@ server.post("/api/send-email", async (request, reply) => {
   const mailgun = new Mailgun(formData);
   const mg = mailgun.client({ username: "api", key: process.env.MAILGUN_API_KEY });
 
+  // Definindo o cabeçalho 'Access-Control-Allow-Origin' na resposta
+  reply.header('Access-Control-Allow-Origin', request.headers.origin);
+
   try {
     const msg = await mg.messages.create(process.env.MAILGUN_DOMAIN, {
       from: "AdaFood <abilioaga@hotmail.com>",
