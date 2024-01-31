@@ -21,6 +21,11 @@ server.register(cors, {
   },
 });
 
+
+server.get("/", (request, reply) => {
+  reply.send({ success: true, message: "Churrascômetro!" });
+})
+
 // Endpoint para enviar e-mails
 server.post("/api/send-email", async (request, reply) => {
   const { email, password } = request.body; // Supondo que o frontend envie os dados do e-mail e senha
