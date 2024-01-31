@@ -6,7 +6,7 @@ import Mailgun from "mailgun.js";
 const server = fastify();
 
 // Configuração de origens permitidas
-const allowedOrigins = ["https://churrascomentro-api-email.vercel.app", "https://churrascomentro-api-email.onrender.com/"];
+const allowedOrigins = ["https://churrascomentro-api-email.onrender.com"];
 
 // Registre o plugin CORS com configuração de origens permitidas
 server.register(cors, {
